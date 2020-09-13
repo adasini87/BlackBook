@@ -1,0 +1,7 @@
+D:\GitHub\BlackBook\sste_technical-master\sste_technical-master\ui_testing\BlackBookUI\BlackBookUI\bin\Debug\netcoreapp3.1\BlackBookUI.exe
+D:\GitHub\BlackBook\sste_technical-master\sste_technical-master\ui_testing\BlackBookUI\BlackBookUI\obj\Debug\netcoreapp3.1\BlackBookUI.csprojAssemblyReference.cache
+D:\GitHub\BlackBook\sste_technical-master\sste_technical-master\ui_testing\BlackBookUI\BlackBookUI\obj\Debug\netcoreapp3.1\BlackBookUI.AssemblyInfoInputs.cache
+D:\GitHub\BlackBook\sste_technical-master\sste_technical-master\ui_testing\BlackBookUI\BlackBookUI\obj\Debug\netcoreapp3.1\BlackBookUI.AssemblyInfo.cs
+D:\GitHub\BlackBook\sste_technical-master\sste_technical-master\ui_testing\BlackBookUI\BlackBookUI\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\GitHub\BlackBook\sste_technical-master\sste_technical-master\ui_testing\BlackBookUI\BlackBookUI\bin\Debug\netcoreapp3.1\WebDriver.dll
+D:\GitHub\BlackBook\sste_technical-master\sste_technical-master\ui_testing\BlackBookUI\BlackBookUI\obj\Debug\netcoreapp3.1\BlackBookUI.csproj.CopyComplete
