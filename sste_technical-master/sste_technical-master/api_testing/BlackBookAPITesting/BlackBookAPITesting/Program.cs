@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace BlackBookAPITesting
 {
@@ -35,13 +36,34 @@ namespace BlackBookAPITesting
                     client.BaseAddress = new Uri(url);
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    Console.WriteLine("GET");
+                    //Console.WriteLine("GET");
                     var byteArray = Encoding.ASCII.GetBytes("RGSZQrvO:enrKTFzr");
                     client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
-                    HttpResponseMessage response = await client.GetAsync(url1);
-                    if (response.IsSuccessStatusCode)
+                    HttpResponseMessage httpresponse = await client.GetAsync(url1);
+                    //EffectiveParameters epresponse = new EffectiveParameters();
+                    
+
+
+                    if (httpresponse.IsSuccessStatusCode)
                     {
                         Console.WriteLine("The Response for the request is 200 Status code");
+                        Result list1 = await httpresponse.Content.ReadAsAsync<Result>();                        
+                        Console.WriteLine(list1.error_count);
+                        Console.WriteLine(list1.warning_count);
+                        
+                        bool check = false;
+                        foreach(var v in list1.message_list)
+                        {
+                            if(v.type.ToLower()=="error")
+                            {
+                                check = true;
+                                break;
+                            }
+                        }
+                        if(check==true)
+                            Console.WriteLine("Message List Type has error type");
+                        else
+                            Console.WriteLine("Message List Type has no error type");
 
                         Console.ReadKey();
 
