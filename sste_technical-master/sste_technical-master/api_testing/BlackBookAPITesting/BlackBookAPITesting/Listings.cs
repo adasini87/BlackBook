@@ -19,8 +19,8 @@ namespace BlackBookAPITesting
         [DataMember]
         public List<Type> message_list { get; set; }
 
-        //[DataMember]
-       // public List<EffectiveParameters> effective_parameters { get; set; }
+        [DataMember]
+        public EffectiveParameters effective_parameters { get; set; }
 
         [DataMember]
         public List<Listings1> listings { get; set; }
@@ -54,8 +54,8 @@ namespace BlackBookAPITesting
     [DataContract]
     public class EffectiveParameters
     {
-
-
+        public bool duplicate_vins { get; set; }
+        public int minimum_mileage { get; set; }
     }
 
     [DataContract]

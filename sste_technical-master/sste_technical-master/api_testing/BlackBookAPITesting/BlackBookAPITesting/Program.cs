@@ -18,7 +18,7 @@ namespace BlackBookAPITesting
         {
             var endpoint = "https://sste-test.blackbookcloud.com/retailapi/retailapi";
             RunAsync(endpoint).Wait();
-            System.Threading.Thread.Sleep(10000);
+            //System.Threading.Thread.Sleep(10000);
             Console.ReadLine();
 
         }
@@ -51,12 +51,12 @@ namespace BlackBookAPITesting
                     //De-serialize and check for status code
 
 
+
                     if (httpresponse.IsSuccessStatusCode)
                     {
                         Console.WriteLine("The Response for the request is 200 Status code");
                         Result list1 = await httpresponse.Content.ReadAsAsync<Result>();                        
-                        Console.WriteLine(list1.error_count);
-                        Console.WriteLine(list1.warning_count);
+
 
                         // check for type in message list
                         bool check = false;
@@ -96,6 +96,15 @@ namespace BlackBookAPITesting
                         if (intcheck == true)
                         {
                             Console.WriteLine("listings[].msrp is an integer");
+                        }
+
+                        if (!(string.IsNullOrWhiteSpace(Convert.ToString(list1.effective_parameters))))
+                        {
+                            Console.WriteLine("effective_parameters key exists in JSON/XML");
+                        }
+                        else
+                        {
+                            Console.WriteLine("effective_parameters dont exists in JSON/XML");
                         }
 
 
