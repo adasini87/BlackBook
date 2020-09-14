@@ -19,6 +19,12 @@ namespace BlackBookAPITesting
         [DataMember]
         public List<Type> message_list { get; set; }
 
+        //[DataMember]
+       // public List<EffectiveParameters> effective_parameters { get; set; }
+
+        [DataMember]
+        public List<Listings1> listings { get; set; }
+
     }
     [DataContract]
     public class WarningCount
@@ -53,24 +59,20 @@ namespace BlackBookAPITesting
     }
 
     [DataContract]
-    public class Listings
+    public class Listings1
     {
         [DataMember]
-        public string account { get; set; }
-        [DataMember]
-        public int tierCode { get; set; }
-        [DataMember]
-        public string tierDescription { get; set; }
-        [DataMember]
-        public string tierPoints { get; set; }
-        [DataMember]
-        public long cmpPoints { get; set; }
-        [DataMember]
-        public string tierDisplayMessage { get; set; }
-        [DataMember]
-        public string[] tierDisplayMessageArgs { get; set; }
+        public int msrp { get; set; }
+
 
     }
 
+    public class Listing1
+    {
+        [DataMember]
+        public int msrp1 { get; set; }
+
+
+    }
 
 }

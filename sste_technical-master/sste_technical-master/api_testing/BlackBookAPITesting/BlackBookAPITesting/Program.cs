@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 using System.Net;
 using System.IO;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace BlackBookAPITesting
 {
@@ -17,9 +18,15 @@ namespace BlackBookAPITesting
         {
             var endpoint = "https://sste-test.blackbookcloud.com/retailapi/retailapi";
             RunAsync(endpoint).Wait();
-            //System.Threading.Thread.Sleep(10000);
+            System.Threading.Thread.Sleep(10000);
             Console.ReadLine();
 
+        }
+
+        private static bool IsIntegerRegex(string value)
+        {
+            const string regex = @"^\d+.$";
+            return Regex.IsMatch(value, regex);
         }
 
         public static async Task RunAsync(string url)
@@ -30,7 +37,7 @@ namespace BlackBookAPITesting
 
                 using (var client = new HttpClient())
                 {
-                    //Get Data
+                    //Get Response Stream
 
                     string url1 = url+"/listings?uvc=2015300726&vin=1FTEW1EF8FFC45951&zipcode=30518";
                     client.BaseAddress = new Uri(url);
@@ -40,8 +47,8 @@ namespace BlackBookAPITesting
                     var byteArray = Encoding.ASCII.GetBytes("RGSZQrvO:enrKTFzr");
                     client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
                     HttpResponseMessage httpresponse = await client.GetAsync(url1);
-                    //EffectiveParameters epresponse = new EffectiveParameters();
                     
+                    //De-serialize and check for status code
 
 
                     if (httpresponse.IsSuccessStatusCode)
@@ -50,7 +57,8 @@ namespace BlackBookAPITesting
                         Result list1 = await httpresponse.Content.ReadAsAsync<Result>();                        
                         Console.WriteLine(list1.error_count);
                         Console.WriteLine(list1.warning_count);
-                        
+
+                        // check for type in message list
                         bool check = false;
                         foreach(var v in list1.message_list)
                         {
@@ -65,7 +73,41 @@ namespace BlackBookAPITesting
                         else
                             Console.WriteLine("Message List Type has no error type");
 
+                        //check for listing msrp int type
+
+
+                      // List < Listings1 > lstnData = new List<Listings1>(list1.listings);
+                        bool intcheck = true;
+
+
+                        foreach (var c in list1.listings)
+                        {
+                             if (!(IsIntegerRegex(Convert.ToString(c.msrp))))
+                                {
+                                    Console.WriteLine("listings[].msrp is  not an integer");
+                                    intcheck = false;
+                                    break;
+                                }
+
+
+                            }
+                        
+
+                        if (intcheck == true)
+                        {
+                            Console.WriteLine("listings[].msrp is an integer");
+                        }
+
+
+
+
                         Console.ReadKey();
+
+
+                        //if(list1.has("effective_parameters"))
+                        //{
+
+                        //}
 
                     }
                 }
