@@ -36,6 +36,7 @@ namespace BlackBookUI
         public void Launch()
         {
             webDriver.Navigate().GoToUrl("https://computer-database.herokuapp.com/computers");
+            Console.WriteLine("URL Launched");
         }
 
         [Test]
@@ -51,6 +52,7 @@ namespace BlackBookUI
             SetValue.DropDownSelect(webDriver, "company", "Evans & Sutherland", "Id");
             SetValue.ButtonClick(webDriver, "/html/body/section/form/div/input", "XPath");
             Thread.Sleep(1000);
+            Console.WriteLine("Computer Name Created");
 
             // Search for COmputer Name
             string name = string.Empty;
@@ -67,17 +69,19 @@ namespace BlackBookUI
                 SetValue.EnterValue(webDriver, "discontinued", "2022-09-01", "Id");
                 Thread.Sleep(500);
                 SetValue.ButtonClick(webDriver, "/html/body/section/form[1]/div/input", "XPath");
+                Console.WriteLine("Discontinued Date Modified");
 
             // Verify modified discontinued date
-                SetValue.EnterValue(webDriver, "/html/body/section/div[2]/form/input[1]", "BlackBookUITest", "XPath");
+            SetValue.EnterValue(webDriver, "/html/body/section/div[2]/form/input[1]", "BlackBookUITest", "XPath");
                 Thread.Sleep(500);
                 SetValue.ButtonClick(webDriver, "searchsubmit", "Id");
                 DateTime date = Convert.ToDateTime(GetMethod.GetValue(webDriver, "/html/body/section/table/tbody/tr/td[3]", "XPath"));
                 if (date == Convert.ToDateTime("2022-09-01"))
-                    Console.WriteLine("DateTime matches exists");
+                    Console.WriteLine("Modified Discontinued date verified");
 
                 //delete entries created
             bool check = true;
+
 
                 while (check)
                     {
